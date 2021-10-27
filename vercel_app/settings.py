@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    '.vercel.app'
+    '.vercel.app',
+    '127.0.0.1'
 ]
 
 
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'example',
+    'app'
 ]
 
 MIDDLEWARE = [
@@ -54,11 +56,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'vercel_app.urls'
+TEMPLATE_DIR = os.path.join(BASE_DIR, "vercel_app/templates")
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -114,6 +117,11 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.1/howto/static-files/
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'vercel_app/staticfiles')
+STATIC_URL = '/public/static/static'
 
-STATIC_URL = '/static/'
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'public/static/static'),
+)
